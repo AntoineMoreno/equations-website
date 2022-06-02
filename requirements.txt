@@ -3,3 +3,4 @@ requests
 pandas
 datetime
 typing-extensions
+streamlit_drawable_canvas
