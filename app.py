@@ -19,12 +19,17 @@ st.markdown('''
 '''
 ### Tired of typing this yourself ? ⬇️
 '''
-'''
-\sum_{k=0}^{n-1} ar^k =a \left(\frac{1-r^{n}}{1-r}\right)
-'''
+
+
+
+
 st.latex(r'''
     \sum_{k=0}^{n-1} ar^k =a \left(\frac{1-r^{n}}{1-r}\right)
     ''')
+
+with st.expander("equation"):
+    st.write("\sum_{k=0}^{n-1} ar^k =a \left(\\frac{1-r^{n}}{1-r}\\right)")
+
 
 '''
 ### Just charge your image here
@@ -98,3 +103,6 @@ canvas_result = st_canvas(
 # Do something interesting with the image data
 if canvas_result is not None:
     st.image(canvas_result.image_data)
+
+code_latex = ":)"
+st.write("voici le code", code_latex)
