@@ -40,6 +40,14 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 uploaded_file = st.file_uploader("Choose a CSV file", type=["png", "jpg", "jpeg"])
 
 if uploaded_file is not None:
+    files = {"file": uploaded_file.getvalue()}
+    image_api_url = "http://127.0.0.1:8000/equations"
+    response = requests.post(image_api_url, files=files)
+    if response.status_code == 200:
+        st.write(response.json())
+    else:
+        st.write("error:", response.status_code)
+
     image = Image.open(uploaded_file)
     img_array = np.array(image) # if you want to pass it to OpenCV
     st.image(image, caption="Your equation", width=400)
