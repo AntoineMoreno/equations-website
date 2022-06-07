@@ -3,13 +3,17 @@ import requests
 import numpy as np
 import pandas as pd
 from PIL import Image
+import cv2
+from io import BytesIO
+import base64
+import json
 
 from streamlit_drawable_canvas import st_canvas
 
 
 
 '''
-# Le site des équations 🥳
+# Easy LaTeX ✨
 '''
 
 st.markdown('''
@@ -27,20 +31,23 @@ st.latex(r'''
     \sum_{k=0}^{n-1} ar^k =a \left(\frac{1-r^{n}}{1-r}\right)
     ''')
 
-with st.expander("equation"):
+with st.expander("LaTeX code ✨"):
     st.write("\sum_{k=0}^{n-1} ar^k =a \left(\\frac{1-r^{n}}{1-r}\\right)")
 
-
 '''
-### Just charge your image here
+______________________________________
+'''
+'''
+## ⚠️ Just charge your image here...
 '''
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
-uploaded_file = st.file_uploader("Choose a CSV file", type=["png", "jpg", "jpeg"])
-
+uploaded_file = st.file_uploader("Choose a file", type=["jpg", "jpeg"])
+print(f'type uploaded file:{type(uploaded_file)}')
 if uploaded_file is not None:
     files = {"file": uploaded_file.getvalue()}
+    print(f'type uploaded file :{type(uploaded_file.getvalue())}' )
     image_api_url = "http://127.0.0.1:8000/equations"
     response = requests.post(image_api_url, files=files)
     if response.status_code == 200:
@@ -50,49 +57,18 @@ if uploaded_file is not None:
 
     image = Image.open(uploaded_file)
     img_array = np.array(image) # if you want to pass it to OpenCV
-    st.image(image, caption="Your equation", width=400)
+    st.image(image, caption="Your image", width=90)
 
+#st.latex(r'''
+    #\sum_{k=0}^{n-1} ar^k =a \left(\frac{1-r^{n}}{1-r}\right)
+   # ''')
 
 '''
 ______________________________________
+## ...or draw your equation ✍🏻!
 '''
-
-agree = st.checkbox('I agree')
-
-if agree:
-     st.write('Great!')
-     '''
-
-        ## Once we have these, let's call our API in order to retrieve a prediction
-
-        See ? No need to load a `model.joblib` file in this app, we do not even need to know anything about Data Science in order to retrieve a prediction...
-
-        🤔 How could we call our API ? Off course... The `requests` package 💡
-
-
-        2. Let's build a dictionary containing the parameters for our API...
-
-        3. Let's call our API using the `requests` package...
-
-        4. Let's retrieve the prediction from the **JSON** returned by the API...
-
-        ## Finally, we can display the prediction to the user
-'''
-
-
-
-
-
-
-
-st.title("Drawable Canvas")
-st.markdown("""
-Draw on the canvas, get the image data back into Python !
-* Doubleclick to remove the selected object when not in drawing mode
-""")
-st.sidebar.header("Configuration")
-
-
+#st.markdown(""" """)
+#st.sidebar.header("Configuration")
 
 # Create a canvas component
 canvas_result = st_canvas(
@@ -108,9 +84,37 @@ canvas_result = st_canvas(
     key='canvas',)
 
 
-# Do something interesting with the image data
 if canvas_result is not None:
     st.image(canvas_result.image_data)
+    print(f'image_data type :{type(canvas_result.image_data)}')
 
-code_latex = ":)"
-st.write("voici le code", code_latex)
+#    cv2.imwrite(f"img.jpg",  canvas_result.image_data)
+#   print(canvas_result.image_data)
+#dessous
+    #if canvas_result.image_data is not None:
+     #   cv2.imwrite(f"img.jpg",  canvas_result.image_data)
+      #  print("done")
+       # with open("img.jpg", 'rb') as fh:
+        #    file = BytesIO(fh.read())
+         #   print(f'image file type :{type(file)}')
+
+    #else:
+     #   st.write("no image to save")
+#stop
+
+
+    # with open("img.jpg", "rb") as f:
+    #     im_bytes = f.read()
+    # im_b64 = base64.b64encode(im_bytes).decode("utf8")
+    # file = json.dumps({"image": im_b64})
+    print("done2")
+
+#dessous
+    #files = {"file": file}
+    #image_api_url = "http://127.0.0.1:8000/equations"
+    #response = requests.post(image_api_url, files=files)
+    #print("done3")
+    #if response.status_code == 200:
+    #    st.write(response.json())
+    #else:
+    #    st.write("error:", response.status_code)
