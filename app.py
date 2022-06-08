@@ -42,7 +42,9 @@ ______________________________________
 '''
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
-
+################################
+# avec l'image uploadee
+################################
 uploaded_file = st.file_uploader("Choose a file", type=["jpg", "jpeg"])
 print(f'type uploaded file:{type(uploaded_file)}')
 if uploaded_file is not None:
@@ -51,7 +53,9 @@ if uploaded_file is not None:
     image_api_url = "http://127.0.0.1:8000/equations"
     response = requests.post(image_api_url, files=files)
     if response.status_code == 200:
-        st.write(response.json())
+        a=str(response.json()['code LaTeX'])
+        st.write("Your LaTeX code:", a)
+        st.latex(a)
     else:
         st.write("error:", response.status_code)
 
@@ -70,7 +74,10 @@ ______________________________________
 #st.markdown(""" """)
 #st.sidebar.header("Configuration")
 
-# Create a canvas component
+################################
+# avec le canva
+################################
+
 canvas_result = st_canvas(
     fill_color='rgba(0, 0, 0, 0.3)',
     stroke_width=3,
@@ -84,23 +91,24 @@ canvas_result = st_canvas(
     key='canvas',)
 
 
+
 if canvas_result is not None:
-    st.image(canvas_result.image_data)
+    #st.image(canvas_result.image_data)
     print(f'image_data type :{type(canvas_result.image_data)}')
 
 #    cv2.imwrite(f"img.jpg",  canvas_result.image_data)
 #   print(canvas_result.image_data)
-#dessous
-    #if canvas_result.image_data is not None:
-     #   cv2.imwrite(f"img.jpg",  canvas_result.image_data)
-      #  print("done")
-       # with open("img.jpg", 'rb') as fh:
-        #    file = BytesIO(fh.read())
-         #   print(f'image file type :{type(file)}')
 
-    #else:
-     #   st.write("no image to save")
-#stop
+    if canvas_result.image_data is not None:
+        cv2.imwrite(f"img.jpg",  canvas_result.image_data)
+        print("done")
+        with open("img.jpg", 'rb') as fh:
+            file = BytesIO(fh.read())
+            print(f'image file type :{type(file)}')
+
+    else:
+        st.write("no image to save")
+
 
 
     # with open("img.jpg", "rb") as f:
@@ -109,12 +117,13 @@ if canvas_result is not None:
     # file = json.dumps({"image": im_b64})
     print("done2")
 
-#dessous
-    #files = {"file": file}
-    #image_api_url = "http://127.0.0.1:8000/equations"
-    #response = requests.post(image_api_url, files=files)
-    #print("done3")
-    #if response.status_code == 200:
-    #    st.write(response.json())
-    #else:
-    #    st.write("error:", response.status_code)
+    files = {"file": file}
+    image_api_url = "http://127.0.0.1:8000/equations"
+    response = requests.post(image_api_url, files=files)
+    print("done3")
+    if response.status_code == 200:
+       a=str(response.json()['code LaTeX'])
+       st.write("**Your LaTeX code:**",a)
+       st.latex(a)
+    else:
+       st.write("error:", response.status_code)
