@@ -49,7 +49,7 @@ print(f'type uploaded file:{type(uploaded_file)}')
 if uploaded_file is not None:
     files = {"file": uploaded_file.getvalue()}
     print(f'type uploaded file :{type(uploaded_file.getvalue())}' )
-    image_api_url = "https://image-equations-xp2pvcl2vq-ew.a.run.app/equations"
+    image_api_url = "https://image-equations-2-xp2pvcl2vq-ew.a.run.app/equations"
     response = requests.post(image_api_url, files=files)
     if response.status_code == 200:
         a=str(response.json()['code LaTeX'])
@@ -117,7 +117,7 @@ if canvas_result is not None:
     print("done2")
 
     files = {"file": file}
-    image_api_url = "https://image-equations-xp2pvcl2vq-ew.a.run.app/equations"
+    image_api_url = "https://image-equations-2-xp2pvcl2vq-ew.a.run.app/"
     response = requests.post(image_api_url, files=files)
     print("done3")
     if response.status_code == 200:
@@ -126,6 +126,3 @@ if canvas_result is not None:
        st.latex(a)
     else:
        st.write("error:", response.status_code)
-
-
-st.latex("\\infty")
