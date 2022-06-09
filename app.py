@@ -127,3 +127,6 @@ if canvas_result is not None:
        st.latex(a)
     else:
        st.write("error:", response.status_code)
+
+
+st.latex("\\infty")
