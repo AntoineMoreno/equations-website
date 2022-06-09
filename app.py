@@ -117,7 +117,7 @@ if canvas_result is not None:
     print("done2")
 
     files = {"file": file}
-    image_api_url = "https://image-equations-2-xp2pvcl2vq-ew.a.run.app/"
+    image_api_url = "https://image-equations-2-xp2pvcl2vq-ew.a.run.app/equations"
     response = requests.post(image_api_url, files=files)
     print("done3")
     if response.status_code == 200:
