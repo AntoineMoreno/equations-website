@@ -6,6 +6,5 @@ typing-extensions
 streamlit_drawable_canvas
 opencv-python
 Pillow
-BytesIO
 base64
 json
