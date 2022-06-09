@@ -5,8 +5,7 @@ import pandas as pd
 from PIL import Image
 import cv2
 from io import BytesIO
-import base64
-import json
+
 
 from streamlit_drawable_canvas import st_canvas
 
