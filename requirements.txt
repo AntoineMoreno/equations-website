@@ -1,9 +1,8 @@
 streamlit
 requests
 pandas
-datetime
+#datetime
 typing-extensions
 streamlit_drawable_canvas
-opencv-python
 Pillow
-opencv-python-headless==4.6.0.66
+opencv-python-headless
