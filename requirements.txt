@@ -6,3 +6,4 @@ typing-extensions
 streamlit_drawable_canvas
 opencv-python
 Pillow
+opencv-python-headless==4.2.0.32
